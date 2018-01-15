@@ -1,0 +1,6 @@
+---
+# tasks file for server
+  - name: Atualiza o cache apt de nosso servidor
+    apt: update_cache=yes cache_valid_time=3600
+
+

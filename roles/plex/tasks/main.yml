@@ -1,0 +1,32 @@
+---
+# tasks file for plex
+
+- name: Baixa o Plex para Ubuntu
+  get_url:
+    url: https://downloads.plex.tv/plex-media-server/1.10.1.4602-f54242b6b/plexmediaserver_1.10.1.4602-f54242b6b_amd64.deb
+    dest: /tmp/plex.deb
+  
+
+- name: Installa o Plex no Ubuntu
+  apt:
+    deb: /tmp/plex.deb
+    state: present
+  
+
+- name: Configura Firewall para permitir Plex no Ubuntu
+  ufw:
+    rule: allow
+    to_port: 32400
+    proto: tcp
+    state: enabled
+  
+
+# Start plex
+- name: Certifica que o Plex está sendo executado
+  service:
+    name: plexmediaserver
+    state: started
+
+
+
+
